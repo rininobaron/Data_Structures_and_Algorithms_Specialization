@@ -5,5 +5,5 @@ def huge_fibo_number(n, m):
 			if final_gcd < d:
 				final_gcd = d
 	return final_gcd
-n, m - map(int(), input('').split(' '))
+n, m = map(int(), input('').split(' '))
 print(huge_fibo_number(n, m))
