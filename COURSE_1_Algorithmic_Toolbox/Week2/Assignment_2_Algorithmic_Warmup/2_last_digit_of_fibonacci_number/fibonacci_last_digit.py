@@ -5,6 +5,7 @@ def fibo_last_digit(n):
 	Fn_1 = 1
 	for _ in range(n-1):
 		Fn = Fn_2 + Fn_1
+		Fn = Fn%10
 		Fn_2, Fn_1 = Fn_1, Fn
-	return int(str(Fn)[-1])
+	return Fn
 print(fibo_last_digit(int(input(''))))
