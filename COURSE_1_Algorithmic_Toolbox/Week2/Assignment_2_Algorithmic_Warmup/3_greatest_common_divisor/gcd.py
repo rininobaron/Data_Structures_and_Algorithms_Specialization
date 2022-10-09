@@ -4,7 +4,7 @@ def huge_fibo_number(tupla):
 	if n <= 1:
 		return n
 	final_gcd = 1
-	for d in range(2, min(n, m) * 1):
+	for d in range(2, min(n, m) + 1):
 		if n%d == 0 and m%d == 0:
 			if final_gcd < d:
 				final_gcd = d
