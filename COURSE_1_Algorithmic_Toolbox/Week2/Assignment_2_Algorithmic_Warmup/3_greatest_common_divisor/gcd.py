@@ -6,4 +6,4 @@ def gcd(n, m):
 	return n
 
 n, m = map(int, input('').split(' '))
-print(huge_fibo_number(n, m))
+print(gcd(n, m))
