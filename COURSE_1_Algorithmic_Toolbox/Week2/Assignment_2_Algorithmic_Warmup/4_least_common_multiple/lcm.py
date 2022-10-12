@@ -1,9 +1,13 @@
 def lcm(a, b):
-	lcm = 0
-	for i in range(2, a*b + 1):
-		if i%a == 0 and i%b == 0:
-			lcm = i
-			break
-	return lcm
+	if a == 0 or b == 0:
+		return max(a, b)
+	current_lcm = max(a, b)
+	while (current_lcm%a != 0) or (current_lcm%b != 0):
+		if current_lcm%a != 0:
+			current_lcm += (a - current_lcm%a)
+		elif current_lcm%b != 0:
+			current_lcm += (b - current_lcm%b)
+	return current_lcm
+
 a, b = map(int, input().split())
 print(lcm(a, b))
