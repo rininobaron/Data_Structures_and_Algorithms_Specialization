@@ -1,13 +1,10 @@
-def lcm(a, b):
+def euclideanGCM(a, b):
 	if a == 0 or b == 0:
 		return max(a, b)
-	current_lcm = max(a, b)
-	while (current_lcm%a != 0) or (current_lcm%b != 0):
-		if current_lcm%a != 0:
-			current_lcm += (a - current_lcm%a)
-		elif current_lcm%b != 0:
-			current_lcm += (b - current_lcm%b)
-	return current_lcm
+	a = max(a, b)
+	b = min(a, b)
+	c = a%b
+	return euclideanGCM(b, c)
 
 a, b = map(int, input().split())
-print(lcm(a, b))
+print(a*b//euclideanGCM(a, b))
