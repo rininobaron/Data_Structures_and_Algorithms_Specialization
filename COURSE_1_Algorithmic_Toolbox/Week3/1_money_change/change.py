@@ -11,3 +11,5 @@ def change(money):
 		denom.remove(maxCoin)
 		maxCoin = max(denom)
 	return 1 + change(maxCoin)
+
+print(change(int(input(''))))
