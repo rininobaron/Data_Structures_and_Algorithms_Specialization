@@ -7,7 +7,7 @@ def change(money):
 		return 0
 	denom = [1,2,5]
 	maxCoin = max(denom)
-	while maxCoin > money:
+	if maxCoin > money:
 		denom.remove(maxCoin)
 		maxCoin = max(denom)
 	return 1 + change(maxCoin)
