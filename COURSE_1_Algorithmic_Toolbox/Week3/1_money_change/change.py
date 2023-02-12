@@ -5,7 +5,7 @@ needed to change a given auanity of money
 def change(money):
 	if money == 0:
 		return 0
-	denom = [1,2,5]
+	denom = [1,5,10]
 	maxCoin = max(denom)
 	while maxCoin > money:
 		denom.remove(maxCoin)
