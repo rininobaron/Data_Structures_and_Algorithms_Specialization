@@ -26,12 +26,12 @@ def min_refills(d,m,n_stops,stops):
 				m = original_m
 				if m < next_stop:
 					# The next stop is too far!
-					return refills
+					return -1
 			else:
 				continue
 		else:
 			# The "current" stop is too far!
-			return refills
+			return -1
 	return refills
 
 # Get data from user
