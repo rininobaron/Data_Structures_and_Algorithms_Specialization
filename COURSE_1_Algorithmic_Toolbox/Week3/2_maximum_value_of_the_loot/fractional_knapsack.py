@@ -12,6 +12,8 @@ def maximum_loot(W, costs_weigths2):
 	'''
 	if W == 0:
 		return 0
+	if len(costs_weigths2) == 0:
+		return 0
 	# Compare current weight with W
 	# Remember costs_weigths2 is [[c_1,w_1,coeff_1], ... ,[c_n,w_n,coeff_n]]
 	subtotal = 0
