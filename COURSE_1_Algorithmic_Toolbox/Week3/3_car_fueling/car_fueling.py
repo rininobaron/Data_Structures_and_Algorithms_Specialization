@@ -9,29 +9,31 @@ def min_refills(d,m,n_stops,stops):
 		refills: minimum number of refills (integer)
 	'''
 	if m < stops[0]:
-		return 0
+		return -1
 	original_m = m
 	refills = 0
 	for i in range(n_stops):
 		if i == n_stops-1:
+			prev_stop = stops[i-1]
 			current_stop = stops[i]
 			next_stop = d
+		elif i == 0:
+			prev_stop = 0
+			current_stop = stops[i]
+			next_stop = stops[i]
 		else:
+			prev_stop = stops[i-1]
 			current_stop = stops[i]
 			next_stop = stops[i+1]
-		if m >= current_stop:
-			m -= current_stop
-			if m < next_stop:
-				refills+=1
-				m = original_m
-				if m < next_stop:
-					# The next stop is too far!
-					return -1
-			else:
-				continue
-		else:
-			# The "current" stop is too far!
-			return -1
+		diff = next_stop - current_stop
+		diff2 = current_stop - prev_stop
+		m -= diff2
+		if m < diff:
+			refills+=1
+			m = original_m
+			if m < diff:
+				# The next stop is too far!
+				return -1
 	return refills
 
 # Get data from user
