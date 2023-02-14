@@ -13,11 +13,11 @@ def min_refills(d,m,n_stops,stops):
 	original_m = m
 	refills = 0
 	for i in range(n_stops):
-		if i == n_stops-1:
+		if i == 0:
 			prev_stop = stops[i-1]
 			current_stop = stops[i]
 			next_stop = d
-		elif i == 0:
+		elif i == n_stops-1:
 			prev_stop = 0
 			current_stop = stops[i]
 			next_stop = stops[i]
