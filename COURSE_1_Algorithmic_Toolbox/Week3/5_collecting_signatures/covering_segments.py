@@ -41,13 +41,13 @@ def get_points():
 	# Look for minimum points
 	start = pairs_sort[0][0]
 	final_points = []
-	print(pairs_sort)
+	#print(pairs_sort)
 	while len(pairs_sort) > 0:
 		temp_dict = {}
 		for pair in pairs_sort:
 			if start > pair[1]:
 				start = pair[0]
-			print("start: "+str(start))
+			#print("start: "+str(start))
 			for point in range(start,pair[1]+1):
 				for pair_j in pairs_sort:
 					if pair_j[0] <= point and pair_j[1] >= point:
@@ -73,17 +73,16 @@ def get_points():
 					pairs_sort.remove(pair)
 		start = max(temp_dict.keys())+1
 		final_points.append(final_point)
-		print(temp_dict)
+		#print(temp_dict)
 	final_points.sort()
 	final_points = list(set(final_points))
-	print()
-	print(final_points)
-	#return pairs_copy,pairs,pairs_sort 
+	#print()
+	#print(final_points)
+	return final_points 
 
-print(get_points())
 
-# final_points = get_points()
-# len_ = len(final_points)
-# final_points = " ".join([str(i) for i in final_points])
-# print(len_)
-# print(final_points)
+final_points = get_points()
+len_ = len(final_points)
+final_points = " ".join([str(i) for i in final_points])
+print(len_)
+print(final_points)
