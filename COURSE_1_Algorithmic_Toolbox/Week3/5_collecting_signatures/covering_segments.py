@@ -3,14 +3,6 @@ def get_points():
 	n = int(input(""))
 	counter = 0
 	pairs = []
-	# From segment with min l
-	min_l = 10**9
-	min_r = 0 # Not necessary the min r
-	index_min = 0
-	# From segment with max r
-	max_l = 0 # Not necessary the max l
-	max_r = 0
-	index_max = 0
 	while n != counter:
 		pair = input("")
 		pair = pair.split(" ")
@@ -21,63 +13,77 @@ def get_points():
 			return "ERROR!\nFirst number must be less or equal than second"
 		pairs.append(pair)
 		counter+=1
-		if pair[0] < min_l:
-			min_l = pair[0]
-			min_r = pair[1]
-			index_min = counter
-		if pair[1] > max_r:
-			max_l = pair[0]
-			max_r = pair[1]
-			index_max = counter
-	# Point sweep
-	dict_points = {}
-	for point in range(min_l, max_r+1):
+	# Sort pairs by r (pair[1]) in ascending order
+	pairs_copy = pairs.copy()
+	pairs_sort = []
+	while len(pairs) > 0:
+		pair_min_r = pairs[0]
+		target_index = 0
 		counter = 0
 		for pair in pairs:
-			if pair[0] <= point and pair[1] >= point:
-				if point not in dict_points.keys():
-					dict_points[point] = []
-				dict_points[point].append(counter)
-			counter+=1
-	# Get point with embrace more segmnts
-	max_point = 0 # The point with MORE SEGMENTS
-	target_len = 0 # Number of segements of the max_point
-	for point in dict_points.keys():
-		if target_len <= len(dict_points[point]):
-			if max_point < point:
-				target_len = len(dict_points[point])
-				max_point = point
-	final_points = [max_point]
-	segment_indexes = list(range(len(pairs)))
-	hola = segment_indexes.copy()
-	for i in dict_points[max_point]:
-		segment_indexes.remove(i)
-	# Get remain points
-	while len(segment_indexes) > 0:
-		temp_dict = {}
-		for point in dict_points.keys():
-			if point in final_points:
+			if counter == 0:
+				counter+=1
 				continue
-			for index in segment_indexes:
-				if index in dict_points[point]:
-					if point not in temp_dict.keys():
-						temp_dict[point] = []
-					temp_dict[point].append(index)
-		max_point = 0
+			if pair[1] < pair_min_r[1]:
+				pair_min_r = pair
+				target_index = counter
+			if pair[1] == pair_min_r[1]:
+				if pair[0] < pair_min_r[0]:
+					pair_min_r = pair
+					target_index = counter
+			counter+=1
+		pairs_sort.append(pair_min_r)
+		pairs.pop(target_index)
+	# Appen index to each pair in pairs_sort
+	indexes = list(range(len(pairs_sort)))
+	for index,_ in enumerate(pairs_sort):
+		pairs_sort[index].append(index)
+	# Look for minimum points
+	start = pairs_sort[0][0]
+	final_points = []
+	print(pairs_sort)
+	while len(pairs_sort) > 0:
+		temp_dict = {}
+		for pair in pairs_sort:
+			if start > pair[1]:
+				start = pair[0]
+			print("start: "+str(start))
+			for point in range(start,pair[1]+1):
+				for pair_j in pairs_sort:
+					if pair_j[0] <= point and pair_j[1] >= point:
+						if point not in temp_dict.keys():
+							temp_dict[point] = []
+						temp_dict[point].append(pair_j[2])
+		# Look for the point with more segments "touched"
+		# If there are many points, the maximum is choice
 		target_len = 0
+		final_point = 0
 		for point in temp_dict.keys():
-			if target_len <= len(temp_dict[point]):
-				if max_point < point:
+			if target_len < len(temp_dict[point]):
+				final_point = point
+				target_len = len(temp_dict[point])
+			elif target_len == len(temp_dict[point]):
+				if final_point < point:
+					final_point=point
 					target_len = len(temp_dict[point])
-					max_point = point
-		for i in temp_dict[max_point]:
-			segment_indexes.remove(i)
-		final_points.append(max_point)
+		# Remove the pairs (segments) "touched" by the point
+		for index in temp_dict[final_point]:
+			for pair in pairs_sort:
+				if pair[2] == index:
+					pairs_sort.remove(pair)
+		start = max(temp_dict.keys())+1
+		final_points.append(final_point)
+		print(temp_dict)
 	final_points.sort()
-	return final_points
+	final_points = list(set(final_points))
+	print()
+	print(final_points)
+	#return pairs_copy,pairs,pairs_sort 
 
-final_points = get_points()
-len_ = len(final_points)
-final_points = " ".join([str(i) for i in final_points])
-print(len_)
-print(final_points)
+print(get_points())
+
+# final_points = get_points()
+# len_ = len(final_points)
+# final_points = " ".join([str(i) for i in final_points])
+# print(len_)
+# print(final_points)
