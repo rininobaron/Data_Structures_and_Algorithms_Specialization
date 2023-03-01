@@ -4,16 +4,22 @@ def largest_concatenate():
 	numbers = numbers.split(" ")
 	if n != len(numbers):
 		return print("ERROR\nThe numbers are not "+str(n))
-	numbers2=[]
-	for number in numbers:
-		for digit in number:
-			numbers2.append(digit)
-	numbers2 = [int(i) for i in numbers2]
 	largest_number = ""
-	while len(numbers2) > 0:
-		temp=max(numbers2)
-		largest_number+=str(temp)
-		numbers2.remove(temp)
+	while len(numbers) > 0:
+		fullNumber = numbers[0]
+		maxNumber = numbers[0][0]
+		for i,number in enumerate(numbers):
+			if i==0:
+				continue
+			if int(number[0]) > int(maxNumber):
+				fullNumber=number
+				maxNumber=number[0]
+			elif int(number[0]) == int(maxNumber):
+				if int(number[-1]) > int(fullNumber[-1]):
+					fullNumber=number
+					maxNumber=number[0]
+		largest_number+=fullNumber
+		numbers.remove(fullNumber)
 	return largest_number
 
 print(largest_concatenate())
