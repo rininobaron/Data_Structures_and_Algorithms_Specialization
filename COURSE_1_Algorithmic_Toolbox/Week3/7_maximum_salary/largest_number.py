@@ -27,10 +27,13 @@ def largest_concatenate():
 			elif int(major[:len(minor)]) < int(minor):
 				bestNumber=minor
 			else:
-				if int(major[len(minor):]) >= int(minor[:len(major[len(minor):])]):
-					bestNumber=major
-				else:
-					bestNumber=minor
+				for digit in major[len(minor):]:
+					if digit > minor[0]:
+						bestNumber=major
+						break
+					else:
+						bestNumber=minor
+						break
 		largest_number+=bestNumber
 		numbers.remove(bestNumber)
 	return largest_number
