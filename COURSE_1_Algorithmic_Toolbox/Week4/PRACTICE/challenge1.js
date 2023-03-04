@@ -11,6 +11,7 @@ var doSearch = function(array, targetValue) {
     var guess;
     while(max >= min){
         guess = Math.floor((max+min)/2);
+        console.log(guess);
         if(targetValue===array[guess]){
             return guess; 
         }
