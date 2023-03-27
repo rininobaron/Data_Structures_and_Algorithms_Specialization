@@ -31,6 +31,6 @@ def multi_search():
 	final_array = []
 	for number in array2:
 		final_array.append(binary_search(array, number))
-	return " ".join(final_array)
+	return print(" ".join([str(i) for i in final_array]))
 
 multi_search()
