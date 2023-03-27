@@ -1,6 +1,6 @@
 def binary_search(array, number):
 	minIndex = 0
-	maxIndex = len(array)
+	maxIndex = len(array)-1
 	index = (maxIndex+minIndex)//2
 	while maxIndex>=minIndex:
 		if array[index]==number:
