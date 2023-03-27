@@ -6,10 +6,10 @@ def binary_search(array, number):
 		if array[index]==number:
 			return index
 		elif array[index]>number:
-			minIndex = index + 1
+			maxIndex = index - 1
 			index = (maxIndex+minIndex)//2
 		elif array[index]<number:
-			maxIndex = index - 1
+			minIndex = index + 1
 			index = (maxIndex+minIndex)//2
 	return -1
 
