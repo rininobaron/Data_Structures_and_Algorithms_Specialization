@@ -6,21 +6,10 @@ def majority_element():
 	if n != len(array):
 		return print("ERROR!\nThe length of array is not "+str(n))
 	n_2 = n/2
-	while len(array)>0:
-		pivot = array[0]
-		suma=0
-		counter=0
-		len_ref=len(array)
-		array2=array.copy()
-		while len_ref>counter:
-			number=array2[0]
-			if number==pivot:
-				suma+=1
-				if suma>n_2:
-					return print(1)
-				array.remove(number)
-			array2.remove(number)
-			counter+=1
+	array_set = set(array)
+	for number in array_set:
+		if array.count(number) > n_2:
+			return print(1)
 	return print(0)
 
 majority_element()
