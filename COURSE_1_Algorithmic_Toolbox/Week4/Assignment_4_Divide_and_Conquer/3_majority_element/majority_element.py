@@ -6,9 +6,14 @@ def majority_element():
 	if n != len(array):
 		return print("ERROR!\nThe length of array is not "+str(n))
 	n_2 = n/2
-	array_set = set(array)
-	for number in array_set:
-		if array.count(number) > n_2:
+	array_unique = list(set(array))
+	array_unique.sort()
+	array.sort(reverse=True)
+	for number in array_unique:
+		index = array.index(number)
+		count = len(array) - index
+		array = array[:index]
+		if count > n_2:
 			return print(1)
 	return print(0)
 
