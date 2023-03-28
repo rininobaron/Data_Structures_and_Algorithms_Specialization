@@ -4,12 +4,22 @@ def binary_search_dupli(array, number):
 	index = (maxIndex+minIndex)//2
 	while maxIndex>=minIndex:
 		if array[index]==number:
-			while index>0:
-				index = index-1
+			minIndex = 0
+			maxIndex = index-1
+			while maxIndex>=minIndex:
 				if array[index]==number:
-					continue
-				else:
-					return index + 1
+					if index==0:
+						return index
+					if array[index-1]!=number:
+						return index
+					else:
+						index=index-1
+				if array[index]>number:
+					maxIndex = index - 1
+					index = (maxIndex+minIndex)//2
+				elif array[index]<number:
+					minIndex = index + 1
+					index = (maxIndex+minIndex)//2
 			return index
 		elif array[index]>number:
 			maxIndex = index - 1
