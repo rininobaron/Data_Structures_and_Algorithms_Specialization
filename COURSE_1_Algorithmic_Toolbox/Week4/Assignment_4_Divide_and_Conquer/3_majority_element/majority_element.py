@@ -7,8 +7,13 @@ def majority_element():
 		return print("ERROR!\nThe length of array is not "+str(n))
 	n_2 = n/2
 	counter=0
-	while len(array)!=counter:
-		pivot = array[0]
+	pivots=[]
+	while len(array)>counter:
+		pivot = array[counter]
+		if pivot in pivots:
+			counter+=1
+			continue
+		pivots.append(pivot)
 		suma=0
 		for number in array:
 			if number==pivot:
