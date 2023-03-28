@@ -11,13 +11,15 @@ def majority_element():
 		suma=0
 		counter=0
 		len_ref=len(array)
+		array2=array.copy()
 		while len_ref>counter:
-			number=array[0]
+			number=array2[0]
 			if number==pivot:
 				suma+=1
 				if suma>n_2:
 					return print(1)
-			array.remove(number)
+				array.remove(number)
+			array2.remove(number)
 			counter+=1
 	return print(0)
 
