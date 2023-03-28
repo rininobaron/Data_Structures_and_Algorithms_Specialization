@@ -13,7 +13,8 @@ def binary_search_dupli(array, number):
 					if array[index-1]!=number:
 						return index
 					else:
-						index=index-1
+						max_index=index-1
+						index = (maxIndex+minIndex)//2
 				if array[index]>number:
 					maxIndex = index - 1
 					index = (maxIndex+minIndex)//2
