@@ -1,23 +1,18 @@
-def swap(array, i, minIndex):
-	temp=array[i]
-	array[i]=array[minIndex]
-	array[minIndex]=temp
-	return array
-
 def count_swaps(array):
+	array2=[]
 	counter=0
-	counterFlag=0
-	while counterFlag!=len(array):
-		counterFlag=0
-		for i in range(len(array)):
-			if i==len(array)-1:
-				counterFlag+=1
-				continue
-			if array[i] > array[i+1]:
-				array = swap(array, i, i+1)
-				counter+=1
-			else:
-				counterFlag+=1
+	while len(array)>0:
+		minIndex=0
+		for j in range(1,len(array)):
+			if array[j] < array[minIndex]:
+				minIndex=j
+		if minIndex==0:
+			array2.append(array[minIndex])
+			array.remove(array[minIndex])
+		else:
+			array2.append(array[minIndex])
+			array.remove(array[minIndex])
+			counter+=minIndex
 	return counter
 
 def counter():
