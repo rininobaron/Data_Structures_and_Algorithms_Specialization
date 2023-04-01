@@ -9,11 +9,7 @@ def merge(array1, array2):
 			counter+=len(array1)
 			array.append(array2[0])
 			array2.remove(array2[0])
-	if len(array1)>0:
-		array=array+array1
-	elif len(array2)>0:
-		array=array+array2
-	return array,counter
+	return counter
 
 def sort_count_swaps(array):
 	array2=[]
@@ -44,7 +40,7 @@ def counter():
 	array2=array[m:].copy()
 	array1,counter1=sort_count_swaps(array1)
 	array2,counter2=sort_count_swaps(array2)
-	array,counter=merge(array1,array2)
+	counter=merge(array1,array2)
 	return print(counter+counter1+counter2)
 
 counter()
