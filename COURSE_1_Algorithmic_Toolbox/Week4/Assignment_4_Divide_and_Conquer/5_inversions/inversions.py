@@ -1,33 +1,21 @@
-import time
-
 def merge(array1, array2):
 	counter=0
-	array=[]
 	while len(array1)>0 and len(array2)>0:
 		if array1[0]<=array2[0]:
-			array.append(array1[0])
 			array1.remove(array1[0])
-		else:
-			counter+=len(array1)
-			array.append(array2[0])
-			array2.remove(array2[0])
+			continue
+		counter+=len(array1)
+		array2.remove(array2[0])
 	return counter
 
 def sort_count_swaps(array):
-	array2=[]
 	counter=0
-	while len(array)>0:
-		minIndex=0
-		value=min(array)
-		minIndex=array.index(value)
-		# for j in range(1,len(array)):
-		# 	if array[j] < array[minIndex]:
-		# 		minIndex=j
-		array2.append(array[minIndex])
-		array.remove(array[minIndex])
-		if minIndex!=0:
-			counter+=minIndex
-	return array2,counter
+	array_sorted=sorted(array)
+	for i in range(len(array_sorted)):
+		j=array.index(array_sorted[i])+i
+		array.remove(array_sorted[i])
+		counter+=abs(i-j)
+	return array_sorted, counter
 
 def counter():
 	n=int(input(""))
