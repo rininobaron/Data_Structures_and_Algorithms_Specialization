@@ -1,20 +1,22 @@
 def counter():
 	n,m=input("").split(" ")
 	n,m=int(n),int(m)
-	segments=[]
+	counter_dict={}
 	for _ in range(n):
 		l,r=input("").split(" ")
-		segments.append([int(l),int(r)])
+		for i in range(int(l),int(r)+1):
+			if str(i) not in counter_dict.keys():
+				counter_dict[str(i)]=0
+			counter_dict[str(i)]+=1
 	points=input("").split(" ")
 	if len(points)!=m:
-		return print("ERROR!\nThe number of pints are not "+str(m))
+		return print("ERROR!\nThe number of points are not "+str(m))
 	counter_list=[]
 	for point in points:
-		counter=0
-		for seg in segments:
-			if int(point) in range(seg[0],seg[1]+1):
-				counter+=1
-		counter_list.append(counter)
+		if str(point) in counter_dict.keys():
+			counter_list.append(counter_dict[point])
+			continue
+		counter_list.append(0)
 	return print(" ".join([str(i) for i in counter_list]))
 
 counter()
