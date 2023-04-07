@@ -13,10 +13,10 @@ def counter():
 		return print("ERROR!\nThe number of points are not "+str(m))
 	counter_list=[]
 	for point in points:
-		if str(point) in counter_dict.keys():
+		try:
 			counter_list.append(counter_dict[point])
-			continue
-		counter_list.append(0)
+		except:
+			counter_list.append(0)
 	return print(" ".join([str(i) for i in counter_list]))
 
 counter()
