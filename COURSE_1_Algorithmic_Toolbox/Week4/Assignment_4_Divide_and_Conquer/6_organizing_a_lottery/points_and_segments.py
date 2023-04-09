@@ -1,23 +1,22 @@
 def counter():
-	n,m=input("").split(" ")
-	n,m=int(n),int(m)
-	counter_dict={}
-	for _ in range(n):
-		l,r=input("").split(" ")
-		for i in range(int(l),int(r)+1):
-			if str(i) not in counter_dict.keys():
-				counter_dict[str(i)]=0
-			counter_dict[str(i)]+=1
-	points=input("").split(" ")
-	if len(points)!=m:
-		return print("ERROR!\nThe number of points are not "+str(m))
-	counter_list=[]
-	counter_diff=set(points).difference(set(counter_dict.keys()))
-	for point in points:
-		if point in counter_diff:
-			counter_list.append(str(0))
-			continue
-		counter_list.append(str(counter_dict[point]))
-	return print(" ".join(counter_list))
+    n, m = map(int, input().split(" "))
+    l_array,r_array=[],[]
+    for _ in range(n):
+        l, r = map(int, input().split(" "))
+        l_array.append(l)
+        r_array.append(r)
+    points = input().split(" ")
+    points_int=[int(i) for i in points]
+    if len(points) != m:
+        return print(f"ERROR!\nThe number of points are not {m}")
+    map_ref=[]
+    for point in points_int:
+        for l,r in zip(l_array,r_array):
+            map_ref.append([point,sorted([l,r,point])])
+    counter_dict={point:0 for point in points}
+    for array in map_ref:
+        if array[0]==array[1][1]:
+            counter_dict[str(array[0])]+=1
+    return print(" ".join([str(i) for i in counter_dict.values()]))
 
 counter()
