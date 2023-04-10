@@ -1,13 +1,15 @@
 def min_partial_distance(points,half_x):
 	min_d=10**9
 	distances=[]
+	counter=0
 	for point in points:
-		for point2 in points:
-			if point==point2:
+		for index,point2 in enumerate(points):
+			if counter==index:
 				continue
 			d=((point[0]-point2[0])**2+(point[1]-point2[1])**2)**(1/2)
 			if d<min_d:
 				min_d=d
+		counter+=1
 		distances.append(abs(point[0]-half_x))
 	return min_d, distances
 
@@ -20,13 +22,15 @@ def strip_points(points,distances,d):
 
 def min_final_distance(points):
 	min_d=10**9
+	counter=0
 	for point in points:
-		for point2 in points:
-			if point==point2:
+		for index,point2 in enumerate(points):
+			if counter==index:
 				continue
 			d=((point[0]-point2[0])**2+(point[1]-point2[1])**2)**(1/2)
 			if d<min_d:
 				min_d=d
+		counter+=1
 	return min_d
 
 def min_global_distance():
