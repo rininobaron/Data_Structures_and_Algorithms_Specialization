@@ -1,6 +1,5 @@
-def min_partial_distance(points,half_x):
+def min_partial_distance(points):
 	min_d=float("inf")
-	distances=[]
 	counter=0
 	for point in points:
 		for index,point2 in enumerate(points):
@@ -10,51 +9,46 @@ def min_partial_distance(points,half_x):
 			if d<min_d:
 				min_d=d
 		counter+=1
-		distances.append(abs(point[0]-half_x))
-	return min_d, distances
+	return min_d
 
-def strip_points(points,distances,d):
-	points_final=[]
-	for index,distance in enumerate(distances):
-		if distance<=d:
-			points_final.append(points[index])
-	return points_final
+def strip_points(half_x,d):
+	def calculate_distance(point):
+		return abs(point[0]-half_x)<=d
+	return calculate_distance
 
-def min_final_distance(points):
+def min_final_distance(points,d):
 	min_d=float("inf")
 	for i in range(len(points)):
 		j=i+1
 		while j<=7:
 			if j==len(points):
 				break
-			d=((points[i][0]-points[j][0])**2+(points[i][1]-points[j][1])**2)**(1/2)
-			if d<min_d:
-				min_d=d
+			d_prime=((points[i][0]-points[j][0])**2+(points[i][1]-points[j][1])**2)**(1/2)
+			if d_prime<min_d:
+				min_d=d_prime
+			if min_d>=d:
+				break
 			j+=1
 	return min_d
 
 def min_global_distance():
 	n=int(input(""))
-	X,Y=[],[]
+	points=[]
 	for _ in range(n):
 		x,y=map(int,input("").split(" "))
-		X.append(x)
-		Y.append(y)
-	points=list(zip(X,Y))
+		points.append((x,y))
 	points.sort()
-	points1=points[:len(X)//2]
-	points2=points[len(X)//2:]
-	#half_x=(points1[-1][0]+points2[0][0])/2
-	#half_x=(max(X)+min(X))/2
-	half_x=points[len(X)//2][0]
-	min_d1,distances1=min_partial_distance(points1,half_x)
-	min_d2,distances2=min_partial_distance(points2,half_x)
+	points1=points[:n//2]
+	points2=points[n//2:]
+	half_x=points[n//2][0]
+	min_d1=min_partial_distance(points1)
+	min_d2=min_partial_distance(points2)
 	d=min(min_d1,min_d2)
-	points1=strip_points(points1,distances1,d)
-	points2=strip_points(points2,distances2,d)
+	points1=list(filter(strip_points(half_x,d),points1))
+	points2=list(filter(strip_points(half_x,d),points2))
 	points=points1+points2
 	points = sorted(points, key=lambda point: point[1])
-	d_prime=min_final_distance(points)
+	d_prime=min_final_distance(points,d)
 	min_final_d=min(d,d_prime)
 	return print(min_final_d)
 
