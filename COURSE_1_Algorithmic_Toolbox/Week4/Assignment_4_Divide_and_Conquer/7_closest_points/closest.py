@@ -22,15 +22,15 @@ def strip_points(points,distances,d):
 
 def min_final_distance(points):
 	min_d=float("inf")
-	counter=0
-	for point in points:
-		for index,point2 in enumerate(points):
-			if counter==index:
-				continue
-			d=((point[0]-point2[0])**2+(point[1]-point2[1])**2)**(1/2)
+	for i in range(len(points)):
+		j=i+1
+		while j<=7:
+			if j==len(points):
+				break
+			d=((points[i][0]-points[j][0])**2+(points[i][1]-points[j][1])**2)**(1/2)
 			if d<min_d:
 				min_d=d
-		counter+=1
+			j+=1
 	return min_d
 
 def min_global_distance():
@@ -54,7 +54,8 @@ def min_global_distance():
 	points2=strip_points(points2,distances2,d)
 	points=points1+points2
 	points = sorted(points, key=lambda point: point[1])
-	min_final_d=min_final_distance(points)
+	d_prime=min_final_distance(points)
+	min_final_d=min(d,d_prime)
 	return print(min_final_d)
 
 min_global_distance()
