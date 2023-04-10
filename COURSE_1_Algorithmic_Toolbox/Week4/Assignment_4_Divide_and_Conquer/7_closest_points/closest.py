@@ -1,3 +1,7 @@
+def distance(point1,point2):
+	d=((point1[0]-point2[0])**2+(point1[1]-point2[1])**2)**(1/2)
+	return d
+
 def min_partial_distance(points):
 	min_d=float("inf")
 	counter=0
@@ -5,7 +9,7 @@ def min_partial_distance(points):
 		for index,point2 in enumerate(points):
 			if counter==index:
 				continue
-			d=((point[0]-point2[0])**2+(point[1]-point2[1])**2)**(1/2)
+			d=distance(point,point2)
 			if d<min_d:
 				min_d=d
 		counter+=1
@@ -23,7 +27,7 @@ def min_final_distance(points,d):
 		while j<=7:
 			if j==len(points):
 				break
-			d_prime=((points[i][0]-points[j][0])**2+(points[i][1]-points[j][1])**2)**(1/2)
+			d_prime=distance(points[i],points[j])
 			if d_prime<min_d:
 				min_d=d_prime
 			if min_d>=d:
