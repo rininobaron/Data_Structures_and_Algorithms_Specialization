@@ -5,6 +5,8 @@ def distance(point1,point2):
 	return d
 
 def min_partial_distance(points):
+	if len(points)==2:
+		return distance(points[0],points[1])
 	min_d = float("inf")
 	for point1, point2 in combinations(points, 2):
 		min_d = min(min_d, distance(point1, point2))
@@ -19,7 +21,7 @@ def min_final_distance(points,d):
 	min_d=float("inf")
 	for i in range(len(points)):
 		j=i+1
-		while j<=7:
+		while abs(i-j)<=7:
 			if j==len(points):
 				break
 			d_prime=distance(points[i],points[j])
@@ -37,8 +39,6 @@ def min_global_distance(points):
 	points1=points[:n//2]
 	points2=points[n//2:]
 	half_x=points[n//2][0]
-	#min_d1=min_partial_distance(points1)
-	#min_d2=min_partial_distance(points2)
 	min_d1=min_global_distance(points1)
 	min_d2=min_global_distance(points2)
 	d=min(min_d1,min_d2)
