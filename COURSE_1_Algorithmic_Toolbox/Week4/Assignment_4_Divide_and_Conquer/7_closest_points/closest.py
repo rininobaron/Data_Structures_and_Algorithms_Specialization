@@ -1,19 +1,27 @@
+from itertools import combinations
+
 def distance(point1,point2):
 	d=((point1[0]-point2[0])**2+(point1[1]-point2[1])**2)**(1/2)
 	return d
 
 def min_partial_distance(points):
-	min_d=float("inf")
-	counter=0
-	for point in points:
-		for index,point2 in enumerate(points):
-			if counter==index:
-				continue
-			d=distance(point,point2)
-			if d<min_d:
-				min_d=d
-		counter+=1
+	min_d = float("inf")
+	for point1, point2 in combinations(points, 2):
+		min_d = min(min_d, distance(point1, point2))
 	return min_d
+
+# def min_partial_distance(points):
+# 	min_d=float("inf")
+# 	counter=0
+# 	for point in points:
+# 		for index,point2 in enumerate(points):
+# 			if counter==index:
+# 				continue
+# 			d=distance(point,point2)
+# 			if d<min_d:
+# 				min_d=d
+# 		counter+=1
+# 	return min_d
 
 def strip_points(half_x,d):
 	def calculate_distance(point):
