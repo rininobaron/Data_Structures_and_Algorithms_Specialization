@@ -3,12 +3,15 @@ def calculator(n):
 	currentNumber=n
 	intermediateNumbers=[str(currentNumber)]
 	while currentNumber > 1:
-		if currentNumber%3==0:
-			currentNumber=currentNumber/3
-		elif currentNumber/10==1:
+		if currentNumber/10==1:
 			currentNumber-=1
 		elif currentNumber%2==0:
-			currentNumber=currentNumber/2
+			if currentNumber==4:
+				currentNumber-=1
+			else:
+				currentNumber=currentNumber/2
+		elif currentNumber%3==0:
+			currentNumber=currentNumber/3
 		else:
 			currentNumber-=1
 		intermediateNumbers.append(str(int(currentNumber)))
