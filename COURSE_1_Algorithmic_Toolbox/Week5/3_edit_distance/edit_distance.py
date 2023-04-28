@@ -1,7 +1,7 @@
 def edit_distance(a, b):
 	T=[[float("inf")]*(len(b)+1) for _ in range(len(a)+1)]
 	for i in range(len(a)+1):
-		T[i][0]=1
+		T[i][0]=i
 	for j in range(len(b)+1):
 		T[0][j]=j
 	for i in range(1, len(a)+1):
